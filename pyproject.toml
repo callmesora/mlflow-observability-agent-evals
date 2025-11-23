@@ -1,0 +1,28 @@
+[project]
+name = "genai-eval-demo"
+version = "0.1.0"
+description = "Evaluation Driven Development for GenAI with MLflow and LangChain"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mlflow>=3.6.0",
+    "langchain>=1.0.0",
+    "langchain-openai",
+    "langchain-community",
+    "faiss-cpu",
+    "pandas",
+    "openai",
+    "python-dotenv",
+    "langgraph>=1.0.3",
+    "bs4>=0.0.2",
+    "deepeval>=3.7.2",
+    "google-genai>=1.52.0",
+    "google-generativeai>=0.8.5",
+    "opentelemetry-exporter-otlp>=1.38.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest",
+    "ruff"
+]
