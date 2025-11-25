@@ -200,6 +200,7 @@ const SlidePresentation = () => {
       image: "genai-lambda.png",
       points: [
         { icon: "⚡", text: "GenAI is SO easy to deploy: just call an API" },
+        { icon: "😰", text: "GenAI suffers from data drift, models change over time and prompts change over time" },
         { icon: "🎲", text: "We try things without thinking: 'Let's see if it works' (No Data Driven Decisions)" },
         { icon: "🚀", text: "Ship → Fail → Debug → Repeat (expensive cycle)" },
         { icon: "😰", text: "No confidence in production behavior. No real Edge Case Handeling"},
@@ -229,17 +230,19 @@ const SlidePresentation = () => {
     // ============================================
   
     {
-      title: "Three Layers of Metrics",
+      title: "Layers of Metrics",
       layout: "scorers",
       scorers: [
         { name: "Business Metrics", desc: "Cost per task, Time saved, User satisfaction, ROI" },
-        { name: "ML Performance Metrics", desc: "Correctness, Relevance, Task completion, Tool efficiency" },
-        { name: "Monitoring Metrics", desc: "With ground truth vs without (to catch drift)" }
+        { name: "ML Model Quality and Relevance Metrics", desc: "Correctness, Task completion..." },
+        { name: "Data Quality and Integrity", desc: "Completness, Preplexity..." },
+        { name: "Software System and Health", desc: "Downtime, SLA etc..." },
+
       ],
       accent: "from-violet-500 to-purple-500"
     },
     {
-      title: "Metrics: With vs Without Ground Truth",
+      title: "ML Metrics: With vs Without Ground Truth",
       layout: "comparison",
       left: {
         title: "With Ground Truth",
@@ -253,34 +256,6 @@ const SlidePresentation = () => {
       },
       accent: "from-cyan-500 to-blue-500"
     },
-    {
-      title: "Metrics by Use Case",
-      layout: "grid",
-      items: [
-        { 
-          icon: "🔍", 
-          title: "RAG Systems", 
-          desc: "Correctness (GT) | Answer Relevancy (no GT) | Context Relevancy (no GT)" 
-        },
-        { 
-          icon: "🤖", 
-          title: "Agents", 
-          desc: "Task Completeness (GT) | Tool Trajectory (no GT) | Time Per Task (Business)" 
-        },
-        { 
-          icon: "📊", 
-          title: "Business KPIs", 
-          desc: "Cost Per Run | Time Saved | Error Rate Acceptable" 
-        },
-        { 
-          icon: "⚠️", 
-          title: "Go/No-Go", 
-          desc: "Does it meet minimum thresholds?" 
-        }
-      ],
-      accent: "from-indigo-500 to-blue-500"
-    },
-
     {
       title: "Initial Solution Pathway",
       subtitle: "Find the simplest solution that solves the problem first",
@@ -371,24 +346,7 @@ const SlidePresentation = () => {
       ],
       accent: "from-purple-500 to-pink-500"
     },
-    {
-      title: "What Gets Measured Gets Managed",
-      layout: "concept",
-      subtitle: "The SPI Pyramid",
-      content: "Monitor at all layers: Data → Model → Business. Each lever affects every metric differently.",
-      accent: "from-amber-500 to-orange-500"
-    },
-    {
-      title: "Why Monitoring Matters",
-      layout: "monitoring-benefits",
-      benefits: [
-        { icon: "🛑", title: "Catch Issues Early", desc: "Detect problems before users complain" },
-        { icon: "💡", title: "Safe Experimentation", desc: "Try new models/prompts with confidence" },
-        { icon: "💰", title: "Cost Optimization", desc: "Switch solutions only when proven better" },
-        { icon: "📊", title: "Data-Driven Decisions", desc: "Stakeholders see metrics, not opinions" }
-      ],
-      accent: "from-blue-600 to-cyan-600"
-    },
+
 
     // ============================================
     // PART 4: USE CASE 1 - RAG SYSTEM
@@ -403,14 +361,64 @@ const SlidePresentation = () => {
       accent: "from-blue-500 to-cyan-500"
     },
     {
-      title: "RAG: Defining Success",
-      layout: "baseline",
+      title: "RAG Systems: Metrics That Matter",
+      layout: "metric-showcase",
+      icon: "🔍",
+      subtitle: "Retrieval-Augmented Generation",
       metrics: [
-        { name: "Correctness (GT)", target: "> 0.85", why: "Factually accurate answers" },
-        { name: "Answer Relevancy (no GT)", target: "> 0.80", why: "Addresses the question" },
-        { name: "Context Relevancy (no GT)", target: "> 0.75", why: "Retrieved docs are relevant" }
+        {
+          name: "Correctness",
+          value: "> 0.85",
+          description: "Factually accurate answers",
+          type: "GT",
+          icon: "✓"
+        },
+        {
+          name: "Answer Relevancy",
+          value: "> 0.80",
+          description: "Does it address the question?",
+          type: "no GT",
+          icon: "🎯"
+        },
+        {
+          name: "Context Relevancy",
+          value: "> 0.75",
+          description: "Are retrieved docs relevant?",
+          type: "no GT",
+          icon: "📚"
+        }
       ],
-      accent: "from-pink-500 to-rose-500"
+      accent: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Agents: Metrics That Matter",
+      layout: "metric-showcase",
+      icon: "🤖",
+      subtitle: "Autonomous AI Agents",
+      metrics: [
+        {
+          name: "Task Completeness",
+          value: "> 0.90",
+          description: "Did it finish the job?",
+          type: "GT",
+          icon: "✓"
+        },
+        {
+          name: "Avg Tool Calls Per Task",
+          value: "Optimal",
+          description: "No redundant calls",
+          type: "no GT",
+          icon: "🔗"
+        },
+        {
+          name: "Time Per Task",
+          value: "< 5s",
+          description: "Business GO/NO-GO",
+          type: "Business",
+          icon: "⏱️"
+        }
+      ],
+      accent: "from-emerald-500 to-teal-500"
     },
     {
       title: "RAG: Testing Architectures",
@@ -437,17 +445,6 @@ const SlidePresentation = () => {
       solution: "Build agent that completes tasks efficiently without redundant actions",
       icon: "📝",
       accent: "from-emerald-500 to-teal-500"
-    },
-    {
-      title: "Agent: Defining Success (Business-First)",
-      layout: "baseline",
-      metrics: [
-        { name: "Task Completeness", target: "> 0.90", why: "Did it finish the job?" },
-        { name: "Tool Trajectory", target: "Optimal sequence", why: "No redundant calls" },
-        { name: "Time Per Task", target: "< 5s", why: "Business GO/NO-GO" },
-        { name: "Cost Per Task", target: "< $0.01", why: "Business GO/NO-GO" }
-      ],
-      accent: "from-pink-500 to-rose-500"
     },
     {
       title: "Agent: Testing Architectures",
@@ -601,22 +598,29 @@ const SlidePresentation = () => {
       case "problem":
         return (
           <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center`}>
-            <h2 className="text-5xl font-black mb-12">{slide.title}</h2>
+            <h2 className="text-6xl font-black mb-3">{slide.title}</h2>
+            <p className="text-lg opacity-80 mb-12">Why it's different from traditional software</p>
+            
             <div className="flex items-center gap-12">
-              <div className="flex-1 space-y-6">
+              {/* Points section */}
+              <div className="flex-1 space-y-4">
                 {slide.points.map((pt, i) => (
-                  <div key={i} className="flex items-start gap-6 text-xl">
-                    <span className="text-4xl">{pt.icon}</span>
-                    <p className="pt-2">{pt.text}</p>
+                  <div key={i} className="bg-white/10 backdrop-blur rounded-xl p-5 border-l-4 border-white/40">
+                    <div className="flex items-start gap-4">
+                      <span className="text-3xl flex-shrink-0 mt-1">{pt.icon}</span>
+                      <p className="text-base leading-relaxed">{pt.text}</p>
+                    </div>
                   </div>
                 ))}
               </div>
+              
+              {/* Image section */}
               {slide.image && (
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 w-120">
                   <img 
                     src={slide.image} 
                     alt="Problem illustration"
-                    className="h-120 w-120 rounded-2xl shadow-2xl object-cover"
+                    className="w-120 h-120 rounded-2xl shadow-2xl object-cover"
                   />
                 </div>
               )}
@@ -855,6 +859,52 @@ const SlidePresentation = () => {
                     <p className="text-lg opacity-90">{m.why}</p>
                   </div>
                   <div className="text-4xl font-black text-yellow-300">{m.target}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case "metric-showcase":
+        return (
+          <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center`}>
+            {/* Header */}
+            <div className="mb-12">
+              <div className="flex items-center gap-4 mb-4">
+                <span className="text-6xl">{slide.icon}</span>
+                <div>
+                  <h2 className="text-6xl font-black">{slide.title}</h2>
+                  <p className="text-xl opacity-80 mt-1">{slide.subtitle}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-3 gap-6">
+              {slide.metrics.map((metric, i) => (
+                <div key={i} className="bg-white/15 backdrop-blur rounded-2xl p-8 border border-white/30 flex flex-col">
+                  {/* Icon and metric name */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-4xl">{metric.icon}</span>
+                    <h3 className="text-2xl font-black">{metric.name}</h3>
+                  </div>
+
+                  {/* Value - Big and Bold */}
+                  <div className="mb-6">
+                    <p className="text-5xl font-black mb-2">{metric.value}</p>
+                    <p className="text-sm opacity-70">{metric.description}</p>
+                  </div>
+
+                  {/* Type badge */}
+                  <div className="inline-block mt-auto">
+                    <span className={`text-xs font-bold px-3 py-1 rounded-full ${
+                      metric.type === 'GT' ? 'bg-blue-400/30' :
+                      metric.type === 'no GT' ? 'bg-purple-400/30' :
+                      'bg-amber-400/30'
+                    }`}>
+                      {metric.type}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
