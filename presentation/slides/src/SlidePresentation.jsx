@@ -32,314 +32,265 @@ const SlidePresentation = () => {
   // ============================================
 
   const slides = [
-    // Slide 1: Title
+    // ============================================
+    // PART 1: THEORY & FOUNDATIONS
+    // ============================================
     {
       title: "Evals First, Code Second",
       subtitle: "Building Reliable AI Agents Through Evaluation-Driven Development",
       layout: "title",
       accent: "from-blue-600 to-cyan-600"
     },
-    // Slide 2: ML Engineering Roadmap (Context)
     {
-      title: "The ML Engineering Roadmap",
-      layout: "full-image",
-      image: "https://imgur.com/placeholder1.jpg",
-      alt: "ML Engineering Roadmap with Planning, Scoping, Experimentation, Development, Deployment, and Evaluation phases",
-      accent: "from-slate-700 to-slate-900"
-    },
-    // Slide 3: Key Challenge
-    {
-      title: "🎯 Key Challenge:",
-      layout: "challenge",
-      accent: "from-red-600 to-orange-600"
-    },
-    // Slide 4: The Problem
-    {
-      title: "The Agent Building Problem",
-      layout: "problem",
-      points: [
-        { icon: "⚠️", text: "We build agents blindly, hoping they work" },
-        { icon: "🔄", text: "Discover bugs only in production" },
-        { icon: "💰", text: "Expensive debugging cycles" },
-        { icon: "😰", text: "No confidence in edge case handling" }
-      ],
-      accent: "from-red-500 to-orange-500"
-    },
-    // Slide 3: The Solution
-    {
-      title: "Evaluation-Driven Development",
-      subtitle: "A Paradigm Shift",
-      layout: "concept",
-      content: "Define WHAT SUCCESS LOOKS LIKE before writing a single line of agent code.",
-      accent: "from-emerald-500 to-teal-500"
-    },
-    // Slide 4: EDD Philosophy
-    {
-      title: "The EDD Philosophy",
+      title: "How We Do ML Projects",
       layout: "philosophy",
       phases: [
-        { number: "1", label: "Define", desc: "Test Cases & Metrics" },
-        { number: "2", label: "Build", desc: "Agents & Tools" },
-        { number: "3", label: "Evaluate", desc: "Automated Scoring" },
-        { number: "4", label: "Iterate", desc: "Based on Traces" }
+        { number: "1", label: "Planning", desc: "Define Problem" },
+        { number: "2", label: "Scoping", desc: "Define Success" },
+        { number: "3", label: "Experimentation", desc: "Build & Test" },
+        { number: "4", label: "Development", desc: "Scale Solution" }
       ],
       accent: "from-purple-500 to-pink-500"
     },
-    // Slide 5: Why Evals Matter
     {
-      title: "Why Evals Matter",
-      layout: "grid",
-      items: [
-        { icon: "📊", title: "Quantify Quality", desc: "No more 'seems good'" },
-        { icon: "🔍", title: "Catch Edge Cases", desc: "Before production" },
-        { icon: "🚀", title: "Ship with Confidence", desc: "Metrics don't lie" },
-        { icon: "📈", title: "Track Progress", desc: "See improvements over time" }
+      title: "Evaluation: The Missing Link",
+      layout: "concept",
+      content: "Without systematic evaluation at every stage, we ship blindly. Metrics define what success means.",
+      subtitle: "Theory",
+      accent: "from-emerald-500 to-teal-500"
+    },
+    {
+      title: "The GenAI Problem",
+      layout: "problem",
+      points: [
+        { icon: "⚡", text: "GenAI is SO easy to deploy: just call an API" },
+        { icon: "🎲", text: "We try things without thinking: 'Let's see if it works'" },
+        { icon: "🚀", text: "Ship → Fail → Debug → Repeat (expensive cycle)" },
+        { icon: "😰", text: "No confidence in production behavior" }
       ],
-      accent: "from-indigo-500 to-blue-500"
+      accent: "from-red-500 to-orange-500"
     },
-    // Slide 6: RAG vs Agents
     {
-      title: "Two Critical Patterns",
-      layout: "comparison",
-      left: {
-        title: "RAG Systems",
-        icon: "🔍",
-        points: ["Retrieval Quality", "Answer Correctness", "Multi-hop Reasoning"]
-      },
-      right: {
-        title: "Agentic Systems",
-        icon: "🤖",
-        points: ["Tool Efficiency", "SOP Adherence", "Decision Logic"]
-      },
-      accent: "from-cyan-500 to-blue-500"
+      title: "TDD for Software: Why It Works",
+      layout: "feature",
+      icon: "✅",
+      content: "Test-Driven Development: Write tests FIRST, then code",
+      example: "1. Define test cases\n2. Watch them fail (RED)\n3. Write code\n4. Tests pass (GREEN)\n5. Refactor\n\nResult: High confidence, fewer bugs, clear requirements",
+      accent: "from-blue-500 to-cyan-500"
     },
-    // Slide 7: Test Case Design
     {
-      title: "Designing Test Cases",
+      title: "Evaluation-Driven Development for ML",
       layout: "feature",
       icon: "🎯",
-      content: "Multi-hop test cases reveal real issues. Single-hop is too easy.",
-      example: "❌ 'What\\'s the battery life?' → Easy\n✅ 'Can I use Watch X with Phone Y?' → Requires 2 docs",
+      content: "Same principle: Define evals FIRST, then build",
+      example: "1. Talk to stakeholders → Define success\n2. Define metrics & test cases\n3. Build agent\n4. Run evals\n5. Iterate based on results\n\nResult: You KNOW your agent works",
+      accent: "from-emerald-500 to-teal-500"
+    },
+
+    // ============================================
+    // PART 2: METRICS & SUCCESS DEFINITION
+    // ============================================
+    {
+      title: "Stakeholder Conversation",
+      layout: "concept",
+      subtitle: "Before Writing Code",
+      content: "What does success look like? What tradeoffs matter? What can fail? How often?",
       accent: "from-orange-500 to-red-500"
     },
-    // Slide 8: Scorers & Judges
     {
-      title: "Scorers: How We Measure",
+      title: "Three Layers of Metrics",
       layout: "scorers",
       scorers: [
-        { name: "Correctness", desc: "Is the answer factually right?" },
-        { name: "Relevance", desc: "Does it answer the question?" },
-        { name: "Context Relevancy", desc: "Were retrieved docs relevant?" },
-        { name: "Tool Trajectory", desc: "Did tools follow SOP?" }
+        { name: "Business Metrics", desc: "Cost per task, Time saved, User satisfaction, ROI" },
+        { name: "ML Performance Metrics", desc: "Correctness, Relevance, Task completion, Tool efficiency" },
+        { name: "Monitoring Metrics", desc: "With ground truth vs without (to catch drift)" }
       ],
       accent: "from-violet-500 to-purple-500"
     },
-    // Slide 9: Traces Are Gold
     {
-      title: "Traces: Your Debugging Superpower",
+      title: "Metrics: With vs Without Ground Truth",
+      layout: "comparison",
+      left: {
+        title: "With Ground Truth",
+        icon: "✓",
+        points: ["Requires labeled dataset", "Correctness (did we get it right?)", "Higher confidence", "More work to maintain"]
+      },
+      right: {
+        title: "Without Ground Truth",
+        icon: "👁️",
+        points: ["Monitor in production", "Answer Relevancy (is it relevant?)", "Setup continuous monitoring", "Catch drift automatically"]
+      },
+      accent: "from-cyan-500 to-blue-500"
+    },
+    {
+      title: "Metrics by Use Case",
+      layout: "grid",
+      items: [
+        { 
+          icon: "🔍", 
+          title: "RAG Systems", 
+          desc: "Correctness (GT) | Answer Relevancy (no GT) | Context Relevancy (no GT)" 
+        },
+        { 
+          icon: "🤖", 
+          title: "Agents", 
+          desc: "Task Completeness (GT) | Tool Trajectory (no GT) | Time Per Task (Business)" 
+        },
+        { 
+          icon: "📊", 
+          title: "Business KPIs", 
+          desc: "Cost Per Run | Time Saved | Error Rate Acceptable" 
+        },
+        { 
+          icon: "⚠️", 
+          title: "Go/No-Go", 
+          desc: "Does it meet minimum thresholds?" 
+        }
+      ],
+      accent: "from-indigo-500 to-blue-500"
+    },
+
+    // ============================================
+    // PART 3: AGENT ARCHITECTURE & LEVERS
+    // ============================================
+    {
+      title: "Agent Architecture: The 4 Levers",
+      layout: "philosophy",
+      phases: [
+        { number: "1", label: "Scaffolding", desc: "Agent loop structure" },
+        { number: "2", label: "Tools", desc: "What can it do?" },
+        { number: "3", label: "Prompt", desc: "Instructions & examples" },
+        { number: "4", label: "LLM", desc: "Which model?" }
+      ],
+      accent: "from-purple-500 to-pink-500"
+    },
+    {
+      title: "What Gets Measured Gets Managed",
       layout: "concept",
-      content: "Every agent execution is captured as a hierarchical trace. Debug failures with surgical precision.",
+      subtitle: "The SPI Pyramid",
+      content: "Monitor at all layers: Data → Model → Business. Each lever affects every metric differently.",
       accent: "from-amber-500 to-orange-500"
     },
-    // Slide 10: Trace Anatomy
     {
-      title: "Understanding Traces",
-      layout: "trace",
-      traceItems: [
-        { depth: 0, label: "Trace (entire execution)" },
-        { depth: 1, label: "├── Span: LLM Call" },
-        { depth: 1, label: "├── Span: Tool Call (search)" },
-        { depth: 2, label: "│   ├── Input: {query}" },
-        { depth: 2, label: "│   └── Output: [results]" },
-        { depth: 1, label: "└── Span: Tool Call (publish)" }
+      title: "Why Monitoring Matters",
+      layout: "monitoring-benefits",
+      benefits: [
+        { icon: "🛑", title: "Catch Issues Early", desc: "Detect problems before users complain" },
+        { icon: "💡", title: "Safe Experimentation", desc: "Try new models/prompts with confidence" },
+        { icon: "💰", title: "Cost Optimization", desc: "Switch solutions only when proven better" },
+        { icon: "📊", title: "Data-Driven Decisions", desc: "Stakeholders see metrics, not opinions" }
       ],
-      accent: "from-slate-600 to-slate-700"
+      accent: "from-blue-600 to-cyan-600"
     },
-    // Slide 11: RAG Scenario
+
+    // ============================================
+    // PART 4: USE CASE 1 - RAG SYSTEM
+    // ============================================
     {
-      title: "Scenario 1: Product Support Bot",
+      title: "Use Case 1: Product Support Bot (RAG)",
       layout: "scenario",
       scenario: "RAG",
-      problem: "User asks: 'Can I use Watch Pro with Phone X10?'",
-      solution: "Must retrieve specs from BOTH product docs",
+      problem: "Help customers find product info: 'Can I use Watch Pro with Phone X10?'",
+      solution: "Build RAG system that retrieves correct docs and synthesizes answers",
       icon: "🛍️",
       accent: "from-blue-500 to-cyan-500"
     },
-    // Slide 12: Agent Scenario
     {
-      title: "Scenario 2: CMS Manager Agent",
-      layout: "scenario",
-      scenario: "Agent",
-      problem: "User: 'Ensure Summer Recipes is published'",
-      solution: "Search → Check Status → Publish ONLY if needed",
-      icon: "📝",
-      accent: "from-emerald-500 to-teal-500"
-    },
-    // Slide 13: Metrics & KPIs
-    {
-      title: "Building Success: The KPI Pyramid",
-      layout: "full-image",
-      image: "https://imgur.com/placeholder2.jpg",
-      alt: "KPI Pyramid showing Software System Health, Data Quality, ML Model Quality, and Business KPI",
-      accent: "from-red-700 to-red-900"
-    },
-    // Slide 14: Setting Baselines
-    {
-      title: "Setting Baselines",
+      title: "RAG: Defining Success",
       layout: "baseline",
       metrics: [
-        { name: "Correctness", target: "> 0.85", why: "Core quality" },
-        { name: "Relevance", target: "> 0.80", why: "Addresses user need" },
-        { name: "Efficiency", target: "No redundant calls", why: "Cost & latency" }
+        { name: "Correctness (GT)", target: "> 0.85", why: "Factually accurate answers" },
+        { name: "Answer Relevancy (no GT)", target: "> 0.80", why: "Addresses the question" },
+        { name: "Context Relevancy (no GT)", target: "> 0.75", why: "Retrieved docs are relevant" }
       ],
       accent: "from-pink-500 to-rose-500"
     },
-    // Slide 14: The Feedback Loop
     {
-      title: "The EDD Feedback Loop",
-      layout: "loop",
-      steps: [
-        "Evaluate Current State",
-        "Identify Low Scores",
-        "Drill Into Traces",
-        "Root Cause Analysis",
-        "Improve (Prompt/Tools/Data)",
-        "Re-evaluate"
-      ],
-      accent: "from-green-500 to-emerald-500"
-    },
-    // Slide 15: Before vs After
-    {
-      title: "Before EDD vs After EDD",
-      layout: "beforeafter",
-      before: {
-        title: "Before",
-        points: ["Hope agents work", "Discover bugs late", "Manual testing", "Ship with doubt"]
-      },
-      after: {
-        title: "After",
-        points: ["Know agents work", "Catch issues early", "Automated scoring", "Ship with confidence"]
-      },
-      accent: "from-red-500 to-green-500"
-    },
-    // Slide 16: CI/CD Integration
-    {
-      title: "Scale with CI/CD",
+      title: "RAG: Testing Architectures",
       layout: "feature",
-      icon: "🔄",
-      content: "Run evals on every commit. Fail builds if metrics drop.",
-      example: "Your agent improves → Metrics improve → Deploy with confidence",
-      accent: "from-purple-500 to-indigo-500"
+      icon: "🔬",
+      content: "Which architecture performs best?",
+      example: "• Naive RAG: Simple retrieval + LLM\n• RAG + Reranker: Better ranking\n• Agentic RAG: Multi-hop reasoning\n• Long RAG: Supervisor + Planner\n\nCompare all on same metrics",
+      accent: "from-blue-600 to-indigo-600"
     },
-    // Slide 17: Quick Tips
     {
-      title: "EDD Best Practices",
-      layout: "tips",
-      tips: [
-        "Start with 5-10 critical test cases, not 100",
-        "Include edge cases that previously failed",
-        "Use LLM-as-a-judge but understand limitations",
-        "Monitor traces religiously",
-        "Update tests as you discover new issues"
-      ],
-      accent: "from-yellow-500 to-amber-500"
-    },
-    // Slide 18: Experiment Tracking (with diagram)
-    {
-      title: "Experiment Tracking: The EDD Workflow",
+      title: "RAG Results Comparison",
       layout: "experiment",
       accent: "from-blue-600 to-indigo-600"
     },
 
-    // Slide 19: Key Challenge
+    // ============================================
+    // PART 5: USE CASE 2 - AGENT SYSTEM
+    // ============================================
     {
-      title: "🎯 Key Challenge:",
-      layout: "challenge",
-      accent: "from-red-600 to-orange-600"
+      title: "Use Case 2: CMS Manager Agent",
+      layout: "scenario",
+      scenario: "Agent",
+      problem: "Automate CMS operations: Search articles, check status, publish",
+      solution: "Build agent that completes tasks efficiently without redundant actions",
+      icon: "📝",
+      accent: "from-emerald-500 to-teal-500"
+    },
+    {
+      title: "Agent: Defining Success (Business-First)",
+      layout: "baseline",
+      metrics: [
+        { name: "Task Completeness", target: "> 0.90", why: "Did it finish the job?" },
+        { name: "Tool Trajectory", target: "Optimal sequence", why: "No redundant calls" },
+        { name: "Time Per Task", target: "< 5s", why: "Business GO/NO-GO" },
+        { name: "Cost Per Task", target: "< $0.01", why: "Business GO/NO-GO" }
+      ],
+      accent: "from-pink-500 to-rose-500"
+    },
+    {
+      title: "Agent: Testing Architectures",
+      layout: "feature",
+      icon: "🔬",
+      content: "Which agent system works best?",
+      example: "• React Agent: Simple action/observation\n• Swarm Agent System: Specialist agents\n• Supervision Agent: Hierarchical control\n• Deep Agent: Multi-step reasoning\n• Planner Agent: Plan then execute\n\nCompare on all metrics",
+      accent: "from-green-600 to-emerald-600"
+    },
+    {
+      title: "Agent Results Comparison",
+      layout: "experiment",
+      accent: "from-green-600 to-emerald-600"
     },
 
-    // Slide 20: Tools & Resources
+    // ============================================
+    // PART 6: MONITORING & PRODUCTION
+    // ============================================
     {
-      title: "Your EDD Toolkit",
-      layout: "tools",
-      tools: [
-        { name: "MLflow", purpose: "Trace logging & evaluation" },
-        { name: "LangChain", purpose: "Agent framework" },
-        { name: "DeepEval", purpose: "Custom metrics" },
-        { name: "Your imagination", purpose: "Better prompts & tools" }
-      ],
-      accent: "from-blue-600 to-cyan-600"
-    },
-    // Slide 19: Monitoring Section - Title
-    {
-      title: "🔍 Beyond Launch: Monitoring & Continuous Improvement",
-      layout: "concept",
-      content: "Your evals don't stop after launch. They become your production monitoring system.",
-      accent: "from-purple-600 to-indigo-600"
-    },
-    // Slide 20: Monitoring Scenario 1 - Data Drift
-    {
-      title: "Scenario 1: Detecting Data Drift",
+      title: "Monitoring Scenario 1: Data Drift",
       layout: "monitoring-scenario",
       scenario: "RAG Agent",
       icon: "🚨",
       problem: "One day: gibberish output. Why? Users started uploading French documents.",
       solution: "Your monitoring catches it:",
       steps: [
-        "📊 Text cohesiveness score drops → Alarm triggered",
-        "🔎 Investigation: Check input data",
+        "📊 Answer Relevancy score drops → Alarm triggered",
+        "🔎 Investigation: Check input data distribution",
         "📝 Discovery: French content detected (data drift)",
         "🎯 Data distribution changed → Model behavior changed",
-        "✅ Action: Retrain embedder or add multilingual support"
+        "✅ Action: Add multilingual embeddings or reindex"
       ],
       accent: "from-orange-500 to-red-500"
     },
-    // Slide 21: Monitoring Scenario 2 - Model Upgrade
     {
-      title: "Scenario 2: Confident Model Upgrades",
+      title: "Monitoring Scenario 2: Model Upgrade",
       layout: "monitoring-scenario",
       scenario: "Agent Upgrade",
       icon: "⬆️",
-      problem: "Claude 5 Turbo Mini is released. Should we switch?",
+      problem: "New GPT-5 is released. Worth switching from GPT-4?",
       solution: "Your monitoring proves it's safe:",
       steps: [
-        "🧪 Deploy new model in shadow mode with same evals",
-        "📈 Compare: Task completion rate (same or better?)",
-        "💾 Compare: Average tool calls per task (fewer = cheaper)",
-        "🔄 Compare: Prompt performance (do old prompts still work?)",
-        "✅ Data-driven decision: Switch with confidence"
+        "🧪 Shadow deploy: Run both models on same tasks",
+        "📈 Compare: Task completion (same or better?)",
+        "💾 Compare: Tool calls per task (fewer = cheaper)",
+        "⏱️ Compare: Time per task (faster?)",
+        "✅ Data-driven: Switch based on metrics, not hype"
       ],
       accent: "from-green-500 to-emerald-500"
     },
-    // Slide 22: Why Monitoring Matters
-    {
-      title: "Why Continuous Monitoring?",
-      layout: "monitoring-benefits",
-      benefits: [
-        {
-          icon: "🛑",
-          title: "Catch Issues Early",
-          desc: "Detect problems before users complain"
-        },
-        {
-          icon: "💡",
-          title: "Safe Experimentation",
-          desc: "Try upgrades with data backing your decisions"
-        },
-        {
-          icon: "💰",
-          title: "Cost Optimization",
-          desc: "Switch models/prompts when metrics prove it's worth it"
-        },
-        {
-          icon: "📊",
-          title: "Build Trust",
-          desc: "Stakeholders see metrics, not just 'it seems better'"
-        }
-      ],
-      accent: "from-blue-600 to-cyan-600"
-    },
-    // Slide 23: Monitoring Metrics by Layer
     {
       title: "Monitoring at Every Layer",
       layout: "monitoring-layers",
@@ -352,32 +303,50 @@ const SlidePresentation = () => {
         {
           layer: "Model Layer",
           metrics: ["Response coherence", "Task completion", "Tool efficiency"],
-          example: "Fewer tool calls after upgrade"
+          example: "Fewer tool calls with new model"
         },
         {
           layer: "Business Layer",
-          metrics: ["User satisfaction", "Cost per task", "Response latency"],
-          example: "Cost savings with new model"
+          metrics: ["Cost per task", "Time per task", "Error rate"],
+          example: "Cost vs accuracy tradeoff"
         }
       ],
       accent: "from-violet-500 to-purple-500"
     },
-    // Slide 24: Workshop Recap
+
+    // ============================================
+    // PART 7: RECAP & ACTION
+    // ============================================
     {
-      title: "What We're Building Today",
-      layout: "recap",
-      sections: [
-        { title: "RAG Evaluation", items: ["Knowledge base", "Multi-hop queries", "Retrieval scorers"] },
-        { title: "Agent Evaluation", items: ["Tool trajectory", "Task completion", "Efficiency analysis"] }
+      title: "The EDD Loop",
+      layout: "loop",
+      steps: [
+        "Define Success",
+        "Choose Metrics",
+        "Build Baseline",
+        "Test Architectures",
+        "Monitor Results",
+        "Ship Best Option"
       ],
-      accent: "from-pink-500 to-purple-500"
+      accent: "from-green-500 to-emerald-500"
     },
-    // Slide 25: Call to Action
+    {
+      title: "Key Takeaways",
+      layout: "tips",
+      tips: [
+        "Talk to stakeholders FIRST. Understand success criteria.",
+        "Choose metrics before coding. Mix business + ML metrics.",
+        "Baseline simple solution. You'll outperform it anyway.",
+        "Test multiple architectures systematically.",
+        "Monitor in production. What gets measured gets managed."
+      ],
+      accent: "from-yellow-500 to-amber-500"
+    },
     {
       title: "Your Challenge",
       layout: "cta",
-      challenge: "Don't just watch—code along. Modify. Experiment. Break it.",
-      action: "After today: Take your own agents. Write evals first. Ship with confidence.",
+      challenge: "Don't just watch—code along. Build evals for YOUR agent.",
+      action: "After today: Define success with stakeholders. Write evals first. Ship with confidence.",
       accent: "from-green-500 to-emerald-500"
     }
   ];
