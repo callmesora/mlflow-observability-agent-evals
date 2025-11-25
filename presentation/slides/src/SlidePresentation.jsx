@@ -314,6 +314,44 @@ const SlidePresentation = () => {
       accent: "from-violet-500 to-purple-500"
     },
 
+    {
+      title: "Initial Solution Pathway",
+      subtitle: "Find the simplest solution that solves the problem first",
+      layout: "pathway",
+      pathways: [
+        {
+          number: "1",
+          icon: "⚡",
+          label: "Quick Wins",
+          desc: "Simple data visualization? Simple aggregation? Single equation?",
+          bgColor: "bg-green-500"
+        },
+        {
+          number: "2",
+          icon: "📊",
+          label: "Advanced Analytics",
+          desc: "Heuristic approach that meets requirements? Rules-based?",
+          bgColor: "bg-emerald-700"
+        },
+        {
+          number: "3",
+          icon: "🤖",
+          label: "Traditional ML",
+          desc: "Predictive modeling? Recommendation engines? Simulations?",
+          bgColor: "bg-orange-400"
+        },
+        {
+          number: "4",
+          icon: "🧠",
+          label: "Complex AI",
+          desc: "Deep Learning? Graph modeling? Neural networks?",
+          bgColor: "bg-red-600"
+        }
+      ],
+      progressLabel: "Increasing complexity and costs",
+      accent: "from-slate-800 to-slate-900"
+    },
+
     // ============================================
     // PART 7: RECAP & ACTION
     // ============================================
@@ -853,6 +891,38 @@ const SlidePresentation = () => {
                 </div>
               ))}
             </div>
+          </div>
+        );
+
+      case "pathway":
+        return (
+          <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center`}>
+            <h2 className="text-5xl font-black mb-4">{slide.title}</h2>
+            <p className="text-2xl opacity-90 mb-12">{slide.subtitle}</p>
+            
+            <div className="flex items-start justify-center gap-8 mb-16">
+              {slide.pathways.map((pathway, i) => (
+                <div key={i} className="flex flex-col items-center gap-4">
+                  <div 
+                    className={`rounded-xl p-8 w-56 h-80 text-center transform hover:scale-105 transition flex flex-col items-center justify-center ${pathway.bgColor}`}
+                  >
+                    <div className="text-6xl mb-3">{pathway.icon}</div>
+                    <h3 className="text-2xl font-black mb-1">{pathway.number}</h3>
+                    <h4 className="text-xl font-bold mb-3">{pathway.label}</h4>
+                    <p className="text-sm opacity-90 line-clamp-4">{pathway.desc}</p>
+                  </div>
+                  {i < slide.pathways.length - 1 && (
+                    <div className="text-4xl text-white/70">↓</div>
+                  )}
+                </div>
+              ))}
+            </div>
+            
+            <div className="flex items-center justify-center gap-4 my-8">
+              <div className="flex-1 h-2 bg-gradient-to-r from-green-500 via-yellow-500 via-orange-500 to-red-500 rounded-full"></div>
+              <span className="text-4xl text-white/80">→</span>
+            </div>
+            <p className="text-center text-2xl opacity-90 font-bold">{slide.progressLabel}</p>
           </div>
         );
 
