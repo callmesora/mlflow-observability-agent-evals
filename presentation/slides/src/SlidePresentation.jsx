@@ -332,6 +332,44 @@ const SlidePresentation = () => {
       accent: "from-slate-800 to-slate-900"
     },
 
+    {
+      title: "GenAI Solution Pathway",
+      subtitle: "Start expensive and generic, then optimize down to cost-effective and specialized",
+      layout: "pathway",
+      pathways: [
+        {
+          number: "1",
+          icon: "💰",
+          label: "Expensive Model",
+          desc: "Use GPT-4o. Generic prompt. Get it working first.",
+          bgColor: "bg-red-600"
+        },
+        {
+          number: "2",
+          icon: "📝",
+          label: "Engineer Prompts",
+          desc: "Add examples, instructions, constraints. Improve quality.",
+          bgColor: "bg-orange-500"
+        },
+        {
+          number: "3",
+          icon: "🤖",
+          label: "Smaller Models",
+          desc: "Try GPT-4 mini or Claude Opus. Same prompts.",
+          bgColor: "bg-blue-500"
+        },
+        {
+          number: "4",
+          icon: "⚡",
+          label: "Optimized & Cheap",
+          desc: "Production ready. Cost-effective. Excellent performance.",
+          bgColor: "bg-green-600"
+        }
+      ],
+      progressLabel: "Cost reduction through prompt engineering & model optimization",
+      accent: "from-slate-800 to-slate-900"
+    },
+
     // ============================================
     // PART 3: AGENT ARCHITECTURE & LEVERS
     // ============================================
@@ -476,15 +514,15 @@ const SlidePresentation = () => {
           icon: "✓"
         },
         {
-          name: "Avg Tool Calls Per Task",
-          value: "Optimal",
+          name: "Tool Trajectory",
+          value: ">0.85",
           description: "No redundant calls",
           type: "no GT",
           icon: "🔗"
         },
         {
           name: "Time Per Task",
-          value: "< 5s",
+          value: "< 5m",
           description: "Business GO/NO-GO",
           type: "Business",
           icon: "⏱️"
@@ -503,12 +541,186 @@ const SlidePresentation = () => {
     {
       title: "Agent Results Comparison",
       layout: "experiment",
-      accent: "from-green-600 to-emerald-600"
+      accent: "from-green-600 to-emerald-600",
+      metrics: ["Task Completion", "Tool Calls", "Speed", "Complexity", "Reliability"],
+      experiments: [
+        {
+          name: "ReAct",
+          description: "Reasoning + Acting loop",
+          status: "expensive",
+          scores: [
+            { value: "→", color: "text-yellow-300" },
+            { value: "↓", color: "text-green-300" },
+            { value: "→", color: "text-yellow-300" },
+            { value: "→", color: "text-yellow-300" },
+            { value: "↓", color: "text-red-400" }
+          ],
+          outcome: "⚠️",
+          comment: "Average performance, not reliable"
+        },
+        {
+          name: "Plan and Execute",
+          description: "Strategic planner + executor",
+          status: "expensive",
+          scores: [
+            { value: "→", color: "text-yellow-300" },
+            { value: "↑", color: "text-red-400" },
+            { value: "↓", color: "text-red-400" },
+            { value: "↓", color: "text-red-400" },
+            { value: "↓", color: "text-red-400" }
+          ],
+          outcome: "⚠️",
+          comment: "Average performance, not reliable"
+        },
+        {
+          name: "FunctionCalling",
+          description: "Direct function invocation",
+          status: "winner",
+          scores: [
+            { value: "↑", color: "text-green-300" },
+            { value: "↓", color: "text-green-300" },
+            { value: "↑", color: "text-green-300" },
+            { value: "↑", color: "text-green-300" },
+            { value: "↑", color: "text-green-300" }
+          ],
+          outcome: "✓",
+          comment: "Best balance: reliable, efficient, simple to implement"
+        },
+        {
+          name: "Deep Agent",
+          description: "Multi-step reasoning with memory",
+          status: "expensive",
+          scores: [
+            { value: "↑", color: "text-green-300" },
+            { value: "↑", color: "text-green-300" },
+            { value: "↓", color: "text-red-400" },
+            { value: "↓", color: "text-red-400" },
+            { value: "↑", color: "text-green-300" }
+          ],
+          outcome: "⚠️",
+          comment: "Requires filesystem + sandbox infrastructure"
+        }
+      ]
     },
 
     // ============================================
     // PART 6: MONITORING & PRODUCTION
     // ============================================
+    {
+      title: "Example Monitoring Dashboard: RAG",
+      layout: "monitoring-dashboard",
+      icon: "📊",
+      subtitle: "Real-time metrics from production RAG system",
+      metrics: [
+        {
+          name: "Answer Relevancy",
+          value: "0.82",
+          description: "Response addresses question",
+          type: "no GT",
+          icon: "🎯"
+        },
+        {
+          name: "Context Relevancy",
+          value: "0.79",
+          description: "Retrieved docs on-topic",
+          type: "no GT",
+          icon: "📚"
+        },
+        {
+          name: "Avg Messages per Session",
+          value: "2.3",
+          description: "Average conversation turns",
+          type: "Business",
+          icon: "💬"
+        },
+        {
+          name: "Avg Tokens per Session",
+          value: "1,240",
+          description: "Token consumption per query",
+          type: "Business",
+          icon: "🔤"
+        },
+        {
+          name: "Toxicity",
+          value: "0.08",
+          description: "Harmful or offensive content",
+          type: "Business",
+          icon: "⚠️"
+        },
+        {
+          name: "Avg Cost per Answer",
+          value: "$0.12",
+          description: "Token cost per response",
+          type: "Business",
+          icon: "💰"
+        }
+      ],
+      timeseriesData: [
+        { day: "1", relevancy: 0.78, context: 0.75 },
+        { day: "2", relevancy: 0.79, context: 0.76 },
+        { day: "3", relevancy: 0.80, context: 0.76 },
+        { day: "4", relevancy: 0.81, context: 0.77 },
+        { day: "5", relevancy: 0.82, context: 0.78 },
+        { day: "6", relevancy: 0.81, context: 0.78 },
+        { day: "7", relevancy: 0.82, context: 0.79 }
+      ],
+      legendLabels: ["Answer Relevancy", "Context Relevancy"],
+      accent: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Example Monitoring Dashboard: Agent",
+      layout: "monitoring-dashboard",
+      icon: "📊",
+      subtitle: "Real-time metrics from production agent system",
+      metrics: [
+        {
+          name: "Agent Trajectory",
+          value: "0.93",
+          description: "Successfully finished tasks",
+          type: "no GT",
+          icon: "✓"
+        },
+        {
+          name: "Avg Tools per Session",
+          value: "3.2",
+          description: "Tool calls per task",
+          type: "no GT",
+          icon: "🔗"
+        },
+        {
+          name: "Avg Cost per Session",
+          value: "$0.45",
+          description: "Token cost per task",
+          type: "Business",
+          icon: "💰"
+        },
+        {
+          name: "Avg Tokens per Session",
+          value: "2,840",
+          description: "Token consumption per task",
+          type: "Business",
+          icon: "🔤"
+        },
+        {
+          name: "Avg Time per Task",
+          value: "2.3m",
+          description: "Minutes to completion",
+          type: "Business",
+          icon: "⏱️"
+        }
+      ],
+      timeseriesData: [
+        { day: "1", relevancy: 0.88 },
+        { day: "2", relevancy: 0.89 },
+        { day: "3", relevancy: 0.90 },
+        { day: "4", relevancy: 0.91 },
+        { day: "5", relevancy: 0.92 },
+        { day: "6", relevancy: 0.92 },
+        { day: "7", relevancy: 0.93 }
+      ],
+      legendLabels: ["Agent Trajectory"],
+      accent: "from-emerald-500 to-teal-500"
+    },
     {
       title: "Monitoring Scenario 1: Data Drift",
       layout: "monitoring-scenario",
@@ -541,66 +753,13 @@ const SlidePresentation = () => {
       ],
       accent: "from-green-500 to-emerald-500"
     },
-    {
-      title: "Monitoring at Every Layer",
-      layout: "monitoring-layers",
-      layers: [
-        {
-          layer: "Data Layer",
-          metrics: ["Input distribution", "Data drift", "Schema changes"],
-          example: "French docs detected"
-        },
-        {
-          layer: "Model Layer",
-          metrics: ["Response coherence", "Task completion", "Tool efficiency"],
-          example: "Fewer tool calls with new model"
-        },
-        {
-          layer: "Business Layer",
-          metrics: ["Cost per task", "Time per task", "Error rate"],
-          example: "Cost vs accuracy tradeoff"
-        }
-      ],
-      accent: "from-violet-500 to-purple-500"
-    },
-
+    
     
 
     // ============================================
     // PART 7: RECAP & ACTION
     // ============================================
-    {
-      title: "The EDD Loop",
-      layout: "loop",
-      steps: [
-        "Define Success",
-        "Choose Metrics",
-        "Build Baseline",
-        "Test Architectures",
-        "Monitor Results",
-        "Ship Best Option"
-      ],
-      accent: "from-green-500 to-emerald-500"
-    },
-    {
-      title: "Key Takeaways",
-      layout: "tips",
-      tips: [
-        "Talk to stakeholders FIRST. Understand success criteria.",
-        "Choose metrics before coding. Mix business + ML metrics.",
-        "Baseline simple solution. You'll outperform it anyway.",
-        "Test multiple architectures systematically.",
-        "Monitor in production. What gets measured gets managed."
-      ],
-      accent: "from-yellow-500 to-amber-500"
-    },
-    {
-      title: "Your Challenge",
-      layout: "cta",
-      challenge: "Don't just watch—code along. Build evals for YOUR agent.",
-      action: "After today: Define success with stakeholders. Write evals first. Ship with confidence.",
-      accent: "from-green-500 to-emerald-500"
-    }
+    
   ];
 
   const goToSlide = (n) => {
@@ -1201,6 +1360,181 @@ const SlidePresentation = () => {
                   <p className="text-lg opacity-90">{benefit.desc}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        );
+
+      case "monitoring-dashboard":
+        return (
+          <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center`}>
+            {/* Header */}
+            <div className="mb-4">
+              <div className="flex items-center gap-3">
+                <span className="text-4xl">{slide.icon}</span>
+                <div>
+                  <h2 className="text-4xl font-black">{slide.title}</h2>
+                  <p className="text-xs opacity-80">{slide.subtitle}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Layout: Metrics grid on left, chart on right */}
+            <div className="grid grid-cols-3 gap-4 flex-1">
+              {/* Left: Metrics cards - 2 columns */}
+              <div className="col-span-2 grid grid-cols-2 gap-3 auto-rows-min">
+                {slide.metrics.map((metric, i) => (
+                  <div key={i} className="bg-white/15 backdrop-blur rounded-lg p-3 border border-white/30">
+                    <div className="flex items-start gap-2 mb-2">
+                      <span className="text-2xl">{metric.icon}</span>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-sm font-bold leading-tight">{metric.name}</h3>
+                        <p className="text-xs opacity-70 truncate">{metric.description}</p>
+                      </div>
+                    </div>
+                    <p className="text-xl font-black mb-1">{metric.value}</p>
+                    <span className={`text-xs font-bold px-2 py-0.5 rounded inline-block ${
+                      metric.type === 'no GT' ? 'bg-purple-400/40' : 'bg-amber-400/40'
+                    }`}>
+                      {metric.type}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Right: Line chart - extra compact */}
+              <div className="bg-white/10 backdrop-blur rounded-lg p-2 border border-white/30 flex flex-col">
+                <h3 className="text-xs font-bold mb-1">Trend</h3>
+                
+                {/* Extra Compact SVG Line Chart */}
+                <svg viewBox="0 0 150 70" className="flex-1 w-full" preserveAspectRatio="none">
+                  {/* Grid */}
+                  <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(59, 130, 246, 0.2)" />
+                      <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
+                    </linearGradient>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(34, 197, 94, 0.2)" />
+                      <stop offset="100%" stopColor="rgba(34, 197, 94, 0)" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Grid lines */}
+                  {[...Array(2)].map((_, i) => (
+                    <line key={i} x1="0" y1={i * 35} x2="150" y2={i * 35} stroke="rgba(255,255,255,0.1)" strokeWidth="0.4" />
+                  ))}
+                  
+                  {/* Y-axis */}
+                  <line x1="10" y1="0" x2="10" y2="60" stroke="rgba(255,255,255,0.3)" strokeWidth="0.6" />
+                  
+                  {/* Agent Trajectory line (blue) */}
+                  <polyline
+                    points={slide.timeseriesData.map((d, i) => `${10 + (i * 20)},${60 - (d.relevancy * 60)}`).join(' ')}
+                    fill="none"
+                    stroke="rgba(59, 130, 246, 1)"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  
+                  {/* Task Success line (green) */}
+                  <polyline
+                    points={slide.timeseriesData.map((d, i) => `${10 + (i * 20)},${60 - (d.context * 60)}`).join(' ')}
+                    fill="none"
+                    stroke="rgba(34, 197, 94, 1)"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  
+                  {/* Data points for Agent Trajectory */}
+                  {slide.timeseriesData.map((d, i) => (
+                    <circle key={`blue-${i}`} cx={10 + (i * 20)} cy={60 - (d.relevancy * 60)} r="0.8" fill="rgba(59, 130, 246, 1)" />
+                  ))}
+                  
+                  {/* Data points for Task Success */}
+                  {slide.timeseriesData.map((d, i) => (
+                    <circle key={`green-${i}`} cx={10 + (i * 20)} cy={60 - (d.context * 60)} r="0.8" fill="rgba(34, 197, 94, 1)" />
+                  ))}
+                </svg>
+
+                {/* Compact Legend */}
+                <div className="flex flex-col gap-0.5 mt-1 text-xs">
+                  {slide.legendLabels && slide.legendLabels.map((label, i) => (
+                    <div key={i} className="flex items-center gap-1">
+                      <div className={`w-1.5 h-1.5 rounded-full ${i === 0 ? 'bg-blue-400' : 'bg-green-400'}`}></div>
+                      <span className="truncate">{label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "monitoring-timeline":
+        return (
+          <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center`}>
+            {/* Header */}
+            <div className="mb-8">
+              <div className="flex items-center gap-4 mb-4">
+                <span className="text-5xl">{slide.icon}</span>
+                <div>
+                  <h2 className="text-5xl font-black">{slide.title}</h2>
+                  <p className="text-lg opacity-80 mt-1">{slide.subtitle}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Timeline visualization */}
+            <div className="flex-1 flex flex-col justify-center">
+              <div className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/30">
+                {/* Chart area with simple line representation */}
+                <div className="space-y-6">
+                  {slide.metrics.map((metric, mIdx) => (
+                    <div key={mIdx} className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className={`text-2xl font-black ${metric.color}`}>{metric.trend}</span>
+                          <span className="font-bold text-lg">{metric.name}</span>
+                        </div>
+                      </div>
+                      
+                      {/* Timeline line */}
+                      <div className="flex items-end justify-between gap-2 h-16 bg-white/5 rounded-lg p-3 border border-white/20">
+                        {slide.timelineData.map((point, pIdx) => {
+                          const values = [point.relevancy, point.context, point.toxicity, point.cost];
+                          const value = values[mIdx];
+                          const heightPercent = value * 100;
+                          return (
+                            <div key={pIdx} className="flex-1 flex flex-col items-center">
+                              <div 
+                                className={`w-full rounded-t transition ${metric.color.replace('text-', 'bg-')} opacity-70 hover:opacity-100`}
+                                style={{ height: `${heightPercent}%`, minHeight: '4px' }}
+                                title={`${point.date}: ${value.toFixed(2)}`}
+                              />
+                              <span className="text-xs mt-1 opacity-70">{point.date}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Legend */}
+              <div className="mt-8 flex gap-8 justify-center text-sm">
+                <div className="flex items-center gap-2">
+                  <span className="text-green-400 text-xl">↑</span> <span>Improving</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-orange-400 text-xl">→</span> <span>Stable</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-red-400 text-xl">↓</span> <span>Declining</span>
+                </div>
+              </div>
             </div>
           </div>
         );
