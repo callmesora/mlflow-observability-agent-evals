@@ -722,36 +722,59 @@ const SlidePresentation = () => {
       accent: "from-emerald-500 to-teal-500"
     },
     {
-      title: "Monitoring Scenario 1: Data Drift",
-      layout: "monitoring-scenario",
+      title: "Monitoring Scenario 1: Data Drift Detective",
+      layout: "scenario-story",
       scenario: "RAG Agent",
       icon: "🚨",
-      problem: "One day: gibberish output. Why? Users started uploading French documents.",
-      solution: "Your monitoring catches it:",
+      problem: "3am alert: Answer Relevancy drops from 0.82 → 0.61. Context Relevancy also tanking.",
       steps: [
-        "📊 Answer Relevancy score drops → Alarm triggered",
-        "🔎 Investigation: Check input data distribution",
-        "📝 Discovery: French content detected (data drift)",
-        "🎯 Data distribution changed → Model behavior changed",
-        "✅ Action: Add multilingual embeddings or reindex"
+        "🔔 Alert triggers: Thresholds breached, dashboard shows the drop",
+        "🔎 Investigation: Look at recent uploads → 40% are now in French",
+        "💡 Root cause found: Your embeddings model only speaks English",
+        "🧪 Solution: Switch to multilingual embeddings, re-index French docs",
+        "✅ Before deploy: Run full eval suite against new embeddings",
+        "📊 Compare: New evals vs baseline evals → Performance restored",
+        "🚀 Deploy with confidence: You have data proving it works"
       ],
       accent: "from-orange-500 to-red-500"
     },
     {
-      title: "Monitoring Scenario 2: Model Upgrade",
-      layout: "monitoring-scenario",
-      scenario: "Agent Upgrade",
+      title: "Monitoring Scenario 2: Model Upgrade with Confidence",
+      layout: "scenario-story",
+      scenario: "Agent System",
       icon: "⬆️",
-      problem: "New GPT-5 is released. Worth switching from GPT-4?",
-      solution: "Your monitoring proves it's safe:",
+      problem: "Claude Turbo Mini just dropped. Your CEO asks: 'Should we switch from GPT-4?'",
       steps: [
-        "🧪 Shadow deploy: Run both models on same tasks",
-        "📈 Compare: Task completion (same or better?)",
-        "💾 Compare: Tool calls per task (fewer = cheaper)",
-        "⏱️ Compare: Time per task (faster?)",
-        "✅ Data-driven: Switch based on metrics, not hype"
+        "🔔 Question arrives: New model released, uncertain about switching",
+        "📊 Run evals , Compare metrics: Task Completion, Tool Calls, Cost, Speed vs baseline",
+        "💡 Discovery: new model costs 35% less, 2x faster, same accuracy",
+        "✅ Eval results: All KPIs met or exceeded vs baseline evals",
+        "🚀 Deploy to 10%: Gradual rollout with continued monitoring",
+        "✓ Full rollout: After validating prod behavior matches evals"
       ],
       accent: "from-green-500 to-emerald-500"
+    },
+    {
+      title: "Evals First, Code Second: The Recap",
+      layout: "philosophy",
+      phases: [
+        { number: "1", label: "Understand the Problem", desc: "Talk to stakeholders. What's the real business need? What can break?" },
+        { number: "2", label: "Define Success", desc: "Write down KPIs. Correctness thresholds. Cost limits. Business metrics." },
+        { number: "3", label: "Write Evals First", desc: "Before any code. Build test cases that prove the system works." },
+        { number: "4", label: "Test Your Hypothesis", desc: "Build fast. Run evals. Compare approaches. Pick the winner with data." },
+        { number: "5", label: "Monitor in Production", desc: "Deploy with confidence. Track metrics. Catch drift before users do." },
+        { number: "6", label: "Iterate Faster", desc: "Have baselines. Make changes. Run evals again. Deploy with proof." }
+      ],
+      accent: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Lab Time",
+      subtitle: "Now it's your turn. Build with confidence.",
+      layout: "title-intro",
+      accent: "from-purple-600 to-pink-600",
+      speaker: "Thank you",
+      role: "Pedro Azevedo",
+      credentials: "AI Engineer at Hyland"
     },
     
     
@@ -1630,6 +1653,90 @@ const SlidePresentation = () => {
               <p className="text-2xl opacity-90">{slide.action}</p>
             </div>
             <div className="text-7xl">🚀</div>
+          </div>
+        );
+
+      case "scenario-story":
+        return (
+          <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center`}>
+            {/* Header */}
+            <div className="mb-8">
+              <div className="flex items-center gap-4 mb-3">
+                <span className="text-5xl">{slide.icon}</span>
+                <h2 className="text-4xl font-black">{slide.title}</h2>
+              </div>
+              <p className="text-sm opacity-75 mb-3">{slide.scenario}</p>
+              <div className="bg-white/25 backdrop-blur rounded-lg p-4 border-2 border-white/40">
+                <p className="text-lg font-bold leading-tight">{slide.problem}</p>
+              </div>
+            </div>
+
+            {/* Timeline Story - Multi-row layout */}
+            <div className="flex-1 flex flex-col justify-center gap-4">
+              {/* Split steps into rows - show 4 per row */}
+              {[0, 1].map((rowIdx) => (
+                <div key={rowIdx} className="flex gap-2 items-stretch">
+                  {slide.steps.slice(rowIdx * 4, (rowIdx + 1) * 4).map((step, stepIdx) => {
+                    const absoluteIdx = rowIdx * 4 + stepIdx;
+                    
+                    // Parse step emoji and text
+                    const parts = step.split(" ");
+                    const emoji = parts[0];
+                    const text = parts.slice(1).join(" ");
+                    
+                    // Determine step type for styling
+                    const isAlert = emoji === "🔔";
+                    const isInvestigation = emoji === "🔎";
+                    const isSolution = emoji === "🧪" || emoji === "💡";
+                    const isValidation = emoji === "✅";
+                    const isAction = emoji === "🚀";
+
+                    let bgColor = "bg-white/15";
+                    let borderColor = "border-white/50";
+                    let accentBg = "";
+
+                    if (isAlert) {
+                      bgColor = "bg-red-600/40";
+                      borderColor = "border-red-300";
+                      accentBg = "bg-red-500/20";
+                    } else if (isInvestigation) {
+                      bgColor = "bg-amber-600/40";
+                      borderColor = "border-amber-300";
+                      accentBg = "bg-amber-500/20";
+                    } else if (isSolution) {
+                      bgColor = "bg-blue-600/40";
+                      borderColor = "border-blue-300";
+                      accentBg = "bg-blue-500/20";
+                    } else if (isValidation) {
+                      bgColor = "bg-green-600/40";
+                      borderColor = "border-green-300";
+                      accentBg = "bg-green-500/20";
+                    } else if (isAction) {
+                      bgColor = "bg-purple-600/40";
+                      borderColor = "border-purple-300";
+                      accentBg = "bg-purple-500/20";
+                    }
+
+                    return (
+                      <div key={stepIdx} className="flex gap-2 items-stretch flex-1 min-h-0">
+                        {/* Step card */}
+                        <div className={`${bgColor} backdrop-blur rounded-xl p-4 border-2 ${borderColor} flex-1 flex flex-col justify-between min-h-32 transition hover:shadow-lg hover:border-white/80`}>
+                          <div className={`text-4xl mb-2 ${accentBg} w-fit p-2 rounded-lg`}>{emoji}</div>
+                          <p className="text-sm font-semibold leading-snug flex-1 flex items-center">{text}</p>
+                        </div>
+                        
+                        {/* Arrow connector - only if not last in row */}
+                        {stepIdx < 3 && absoluteIdx < slide.steps.length - 1 && (
+                          <div className="flex items-center px-2">
+                            <div className="text-3xl opacity-70">→</div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
           </div>
         );
 
