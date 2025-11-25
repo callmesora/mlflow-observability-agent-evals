@@ -42,6 +42,95 @@ const SlidePresentation = () => {
       accent: "from-blue-600 to-cyan-600"
     },
     {
+      title: "What Happens Without Monitoring",
+      subtitle: "A True Story",
+      layout: "title",
+      accent: "from-purple-600 to-pink-600"
+    },
+    {
+      title: "Month 0: The Setup",
+      layout: "story-beat",
+      icon: "✅",
+      timeline: "Launch Day",
+      situation: "Agent deployed to production",
+      detail: "Everything works perfectly",
+      color: "from-green-500 to-emerald-500"
+    },
+    {
+      title: "Month 3: The Temptation",
+      layout: "story-beat",
+      icon: "🚀",
+      timeline: "3 Months Later",
+      situation: "New GPT-5 Model Released",
+      detail: "Business: 'Can we switch? Might be better!'",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "The Switch",
+      layout: "story-beat",
+      icon: "🔄",
+      timeline: "Day 1",
+      situation: "Deploy new model to production",
+      detail: "No evals. No testing. 'Let's just try it.'",
+      color: "from-amber-500 to-orange-500"
+    },
+    {
+      title: "Crisis: Everything Breaks",
+      layout: "story-beat",
+      icon: "🚨",
+      timeline: "Day 1 - Afternoon",
+      situation: "Production on fire",
+      detail: "Gibberish responses. Workflows failing. Angry customers calling.",
+      image: "its-fine.jpg",
+      imageAlt: "Everything is fine",
+      color: "from-red-600 to-red-700"
+    },
+    {
+      title: "Emergency: Rollback",
+      layout: "story-beat",
+      icon: "⚡",
+      timeline: "Day 1 - Evening",
+      situation: "Revert to old model immediately",
+      detail: "Phew. Crisis averted. Back to normal.",
+      color: "from-yellow-500 to-amber-500"
+    },
+    {
+      title: "Plot Twist: Silent Failure",
+      layout: "story-beat",
+      icon: "🌍",
+      timeline: "Month 5",
+      situation: "Same gibberish output returns",
+      detail: "Wait... the old model is also failing now.",
+      color: "from-orange-500 to-red-500"
+    },
+    {
+      title: "The Real Problem",
+      layout: "story-beat",
+      icon: "🔍",
+      timeline: "Week Later - Investigation",
+      situation: "Root cause discovered",
+      detail: "Business sold product in Europe. Customers speaking French. Embeddings don't support multilingual.",
+      color: "from-indigo-500 to-purple-500"
+    },
+    {
+      title: "The Financial Gut Punch",
+      layout: "story-beat",
+      icon: "💸",
+      timeline: "End of Quarter",
+      situation: "Finance calls: 'Our bill is $10K'",
+      detail: "Token spending exploded. Retries and re-processing. No optimization.",
+      color: "from-red-600 to-pink-600"
+    },
+    {
+      title: "The Stalemate",
+      layout: "story-beat",
+      icon: "🤷",
+      timeline: "Current Day",
+      situation: "Fear paralysis sets in",
+      detail: "Can't upgrade. Can't fix. Breaking thing means breaking business. Stuck.",
+      color: "from-slate-600 to-slate-700"
+    },
+    {
       title: "How We Do ML Projects",
       layout: "philosophy",
       phases: [
@@ -148,6 +237,82 @@ const SlidePresentation = () => {
         }
       ],
       accent: "from-indigo-500 to-blue-500"
+    },
+
+    {
+      title: "Initial Solution Pathway",
+      subtitle: "Find the simplest solution that solves the problem first",
+      layout: "pathway",
+      pathways: [
+        {
+          number: "1",
+          icon: "⚡",
+          label: "Quick Wins",
+          desc: "Simple data visualization? Simple aggregation? Single equation?",
+          bgColor: "bg-green-500"
+        },
+        {
+          number: "2",
+          icon: "📊",
+          label: "Advanced Analytics",
+          desc: "Heuristic approach that meets requirements? Rules-based?",
+          bgColor: "bg-emerald-700"
+        },
+        {
+          number: "3",
+          icon: "🤖",
+          label: "Traditional ML",
+          desc: "Predictive modeling? Recommendation engines? Simulations?",
+          bgColor: "bg-orange-400"
+        },
+        {
+          number: "4",
+          icon: "🧠",
+          label: "Complex AI",
+          desc: "Deep Learning? Graph modeling? Neural networks?",
+          bgColor: "bg-red-600"
+        }
+      ],
+      progressLabel: "Increasing complexity and costs",
+      accent: "from-slate-800 to-slate-900"
+    },
+
+    {
+      title: "Why GenAI Changes Everything",
+      subtitle: "Minimal implementation, maximum capability with few-shot learning",
+      layout: "pathway",
+      pathways: [
+        {
+          number: "1",
+          icon: "⚡",
+          label: "Quick Wins",
+          desc: "Simple data visualization? Simple aggregation? Single equation?",
+          bgColor: "bg-green-500"
+        },
+        {
+          number: "2",
+          icon: "📊",
+          label: "Advanced Analytics",
+          desc: "Heuristic approach that meets requirements? Rules-based?",
+          bgColor: "bg-emerald-700"
+        },
+        {
+          number: "3",
+          icon: "✨",
+          label: "GenAI + Few-Shot",
+          desc: "Rapid Prototyping, can learn with FewShot, often deployment is simpler",
+          bgColor: "bg-blue-500"
+        },
+        {
+          number: "4",
+          icon: "🧠",
+          label: "Classical ML + DL",
+          desc: "Fine-tuning, complex pipelines, infrastructure required",
+          bgColor: "bg-red-600"
+        }
+      ],
+      progressLabel: "Implementation effort & time to production",
+      accent: "from-slate-800 to-slate-900"
     },
 
     // ============================================
@@ -314,43 +479,7 @@ const SlidePresentation = () => {
       accent: "from-violet-500 to-purple-500"
     },
 
-    {
-      title: "Initial Solution Pathway",
-      subtitle: "Find the simplest solution that solves the problem first",
-      layout: "pathway",
-      pathways: [
-        {
-          number: "1",
-          icon: "⚡",
-          label: "Quick Wins",
-          desc: "Simple data visualization? Simple aggregation? Single equation?",
-          bgColor: "bg-green-500"
-        },
-        {
-          number: "2",
-          icon: "📊",
-          label: "Advanced Analytics",
-          desc: "Heuristic approach that meets requirements? Rules-based?",
-          bgColor: "bg-emerald-700"
-        },
-        {
-          number: "3",
-          icon: "🤖",
-          label: "Traditional ML",
-          desc: "Predictive modeling? Recommendation engines? Simulations?",
-          bgColor: "bg-orange-400"
-        },
-        {
-          number: "4",
-          icon: "🧠",
-          label: "Complex AI",
-          desc: "Deep Learning? Graph modeling? Neural networks?",
-          bgColor: "bg-red-600"
-        }
-      ],
-      progressLabel: "Increasing complexity and costs",
-      accent: "from-slate-800 to-slate-900"
-    },
+    
 
     // ============================================
     // PART 7: RECAP & ACTION
@@ -442,6 +571,47 @@ const SlidePresentation = () => {
                 </div>
               ))}
             </div>
+          </div>
+        );
+
+      case "story-beat":
+        return (
+          <div className={`h-full bg-gradient-to-br ${slide.color} text-white p-12 flex items-center justify-between relative overflow-hidden`}>
+            {/* Background decoration */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -mr-48 -mt-48"></div>
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/5 rounded-full -ml-40 -mb-40"></div>
+            
+            {/* Content */}
+            <div className="relative z-10 flex-1">
+              {/* Timeline badge */}
+              <div className="inline-block bg-white/20 backdrop-blur px-6 py-2 rounded-full text-sm font-bold mb-6 mb-8">
+                ⏱️ {slide.timeline}
+              </div>
+
+              {/* Icon */}
+              <div className="text-8xl mb-8">{slide.icon}</div>
+
+              {/* Title */}
+              <h2 className="text-6xl font-black mb-6 leading-tight">{slide.title}</h2>
+
+              {/* Situation box */}
+              <div className="bg-white/20 backdrop-blur rounded-2xl p-8 mb-8 border border-white/30">
+                <p className="text-sm opacity-70 font-bold mb-3">SITUATION</p>
+                <p className="text-3xl font-bold mb-4">{slide.situation}</p>
+                <p className="text-xl opacity-90">{slide.detail}</p>
+              </div>
+            </div>
+
+            {/* Image section - right side */}
+            {slide.image && (
+              <div className="relative z-10 flex-shrink-0 ml-8">
+                <img 
+                  src={slide.image} 
+                  alt={slide.imageAlt || "Story illustration"}
+                  className="h-96 rounded-2xl shadow-2xl object-cover"
+                />
+              </div>
+            )}
           </div>
         );
 
@@ -954,7 +1124,8 @@ const SlidePresentation = () => {
       <div className="bg-slate-900 border-t border-slate-700 px-6 py-4 flex items-center justify-between">
         <button
           onClick={() => goToSlide(currentSlide - 1)}
-          className="flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-white font-semibold transition"
+          style={{ backgroundColor: '#2563eb' }}
+          className="flex items-center gap-2 px-6 py-3 hover:opacity-80 rounded-lg text-white font-semibold transition"
         >
           <ChevronLeft className="w-5 h-5" /> Previous
         </button>
@@ -967,7 +1138,8 @@ const SlidePresentation = () => {
 
         <button
           onClick={() => goToSlide(currentSlide + 1)}
-          className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold transition"
+          style={{ backgroundColor: '#2563eb' }}
+          className="flex items-center gap-2 px-6 py-3 hover:opacity-80 rounded-lg text-white font-semibold transition"
         >
           Next <ChevronRight className="w-5 h-5" />
         </button>
@@ -979,6 +1151,7 @@ const SlidePresentation = () => {
           <button
             key={i}
             onClick={() => setCurrentSlide(i)}
+            style={{ backgroundColor: '#2563eb' }}
             className={`w-3 h-3 rounded-full transition ${
               i === currentSlide ? 'bg-blue-500 w-8' : 'bg-slate-600 hover:bg-slate-500'
             }`}
