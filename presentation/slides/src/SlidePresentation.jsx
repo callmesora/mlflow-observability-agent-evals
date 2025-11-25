@@ -390,6 +390,78 @@ const SlidePresentation = () => {
       ],
       accent: "from-blue-500 to-cyan-500"
     },
+    
+    {
+      title: "RAG: Testing Architectures",
+      layout: "feature",
+      icon: "🔬",
+      content: "Which architecture performs best?",
+      example: "• Naive RAG: Simple retrieval + LLM\n• RAG + Reranker: Better ranking\n• Agentic RAG: Multi-hop reasoning\n• Long RAG: Supervisor + Planner\n\nCompare all on same metrics",
+      accent: "from-blue-600 to-indigo-600"
+    },
+    {
+      title: "RAG Results Comparison",
+      layout: "experiment",
+      accent: "from-blue-600 to-indigo-600",
+      metrics: ["Correctness", "Cost", "Speed", "Implementation", "Team Familiarity"],
+      experiments: [
+        {
+          name: "Naive RAG",
+          description: "Simple retrieval + LLM",
+          status: "failed",
+          scores: [
+            { value: "↓", color: "text-red-400" },
+            { value: "↓", color: "text-green-300" },
+            { value: "↑", color: "text-green-300" },
+            { value: "↑", color: "text-green-300" },
+            { value: "↑", color: "text-green-300" }
+          ],
+          outcome: "❌",
+          comment: "Correctness 0.68"
+        },
+        {
+          name: "Advanced RAG",
+          description: "LLamaIndex Interface Query ReWrite + Ranking + Filtering",
+          status: "winner",
+          scores: [
+            { value: "↑", color: "text-green-300" },
+            { value: "→", color: "text-yellow-300" },
+            { value: "→", color: "text-yellow-300" },
+            { value: "↑", color: "text-green-300" },
+            { value: "↑", color: "text-green-300" }
+          ],
+          outcome: "✓",
+          comment: "Best fit for our domain"
+        },
+        {
+          name: "Agentic RAG",
+          description: "Langchain Agent Multi-hop reasoning",
+          status: "expensive",
+          scores: [
+            { value: "↑", color: "text-green-300" },
+            { value: "↑", color: "text-red-400" },
+            { value: "↓", color: "text-red-400" },
+            { value: "↓", color: "text-red-400" },
+            { value: "→", color: "text-yellow-300" }
+          ],
+          outcome: "⚠️",
+          comment: "Overkill for single-hop queries"
+        }
+      ]
+    },
+
+    // ============================================
+    // PART 5: USE CASE 2 - AGENT SYSTEM
+    // ============================================
+    {
+      title: "Use Case 2: CMS Manager Agent",
+      layout: "scenario",
+      scenario: "Agent",
+      problem: "Automate CMS operations: Search articles, check status, publish",
+      solution: "Build agent that completes tasks efficiently without redundant actions",
+      icon: "📝",
+      accent: "from-emerald-500 to-teal-500"
+    },
     {
       title: "Agents: Metrics That Matter",
       layout: "metric-showcase",
@@ -418,32 +490,6 @@ const SlidePresentation = () => {
           icon: "⏱️"
         }
       ],
-      accent: "from-emerald-500 to-teal-500"
-    },
-    {
-      title: "RAG: Testing Architectures",
-      layout: "feature",
-      icon: "🔬",
-      content: "Which architecture performs best?",
-      example: "• Naive RAG: Simple retrieval + LLM\n• RAG + Reranker: Better ranking\n• Agentic RAG: Multi-hop reasoning\n• Long RAG: Supervisor + Planner\n\nCompare all on same metrics",
-      accent: "from-blue-600 to-indigo-600"
-    },
-    {
-      title: "RAG Results Comparison",
-      layout: "experiment",
-      accent: "from-blue-600 to-indigo-600"
-    },
-
-    // ============================================
-    // PART 5: USE CASE 2 - AGENT SYSTEM
-    // ============================================
-    {
-      title: "Use Case 2: CMS Manager Agent",
-      layout: "scenario",
-      scenario: "Agent",
-      problem: "Automate CMS operations: Search articles, check status, publish",
-      solution: "Build agent that completes tasks efficiently without redundant actions",
-      icon: "📝",
       accent: "from-emerald-500 to-teal-500"
     },
     {
@@ -982,88 +1028,75 @@ const SlidePresentation = () => {
 
       case "experiment":
         return (
-          <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center`}>
-            <h2 className="text-5xl font-black mb-12">{slide.title}</h2>
-            <div className="bg-white/10 backdrop-blur rounded-2xl p-12 max-h-96 overflow-auto">
-              <svg viewBox="0 0 1000 600" className="w-full h-auto">
-                {/* Experiment 1 Box */}
-                <rect x="20" y="30" width="250" height="140" rx="20" fill="none" stroke="white" strokeWidth="2"/>
-                <text x="40" y="60" fontSize="18" fontWeight="bold" fill="white">Experiment 1</text>
-                <text x="40" y="90" fontSize="14" fill="#64B5F6">- LLangchain</text>
-                <text x="40" y="115" fontSize="14" fill="#64B5F6">- Multi Agent</text>
-                <text x="40" y="140" fontSize="14" fill="#64B5F6">- React Tool calling on each agent</text>
-                <text x="85" y="170" fontSize="16" fontWeight="bold" fill="#FFB74D">LangChain</text>
+          <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center overflow-x-auto`}>
+            <h2 className="text-5xl font-black mb-8">{slide.title}</h2>
+            
+            {/* Metrics Header Row */}
+            <div className="flex gap-2 mb-4">
+              <div className="w-48 flex-shrink-0"></div>
+              <div className={`grid gap-2 flex-1`} style={{ gridTemplateColumns: `repeat(${slide.metrics.length + 2}, 1fr)` }}>
+                {slide.metrics.map((metric, i) => (
+                  <div key={i} className="bg-white/40 rounded-lg p-3 text-center text-xs font-bold border-2 border-white/60">
+                    {metric}
+                  </div>
+                ))}
+                <div className="bg-white/40 rounded-lg p-3 text-center text-xs font-bold border-2 border-white/60">Outcome</div>
+                <div className="bg-white/40 rounded-lg p-3 text-center text-xs font-bold border-2 border-white/60">Comments</div>
+              </div>
+            </div>
 
-                {/* Run 1 Bad - Red arrow */}
-                <line x1="270" y1="100" x2="380" y2="100" stroke="#EF5350" strokeWidth="3" markerEnd="url(#arrowred)"/>
-                <rect x="380" y="60" width="200" height="80" rx="10" fill="none" stroke="#EF5350" strokeWidth="2"/>
-                <text x="390" y="85" fontSize="14" fontWeight="bold" fill="#EF5350">Very Bad</text>
-                <text x="390" y="105" fontSize="14" fontWeight="bold" fill="#EF5350">Performance on</text>
-                <text x="390" y="125" fontSize="14" fontWeight="bold" fill="#EF5350">Q4 Dataset</text>
+            {/* Legend */}
+            <div className="flex gap-6 mb-6 text-sm font-bold">
+              <div className="flex items-center gap-2"><span className="text-4xl text-green-300">↑</span><span>Strong</span></div>
+              <div className="flex items-center gap-2"><span className="text-4xl text-red-400">↓</span><span>Weak</span></div>
+              <div className="flex items-center gap-2"><span className="text-4xl text-yellow-300">→</span><span>Average</span></div>
+            </div>
 
-                {/* Comment */}
-                <text x="590" y="105" fontSize="13" fill="#FFD54F" fontStyle="italic">Seems to be an</text>
-                <text x="590" y="125" fontSize="13" fill="#FFD54F" fontStyle="italic">overall solution</text>
+            {/* Experiments */}
+            <div className="space-y-3">
+              {slide.experiments.map((exp, expIdx) => {
+                const bgColor = exp.status === "failed" ? "bg-red-900/50" : 
+                               exp.status === "expensive" ? "bg-yellow-900/50" : 
+                               "bg-green-900/50";
+                const borderColor = exp.status === "failed" ? "border-red-400" : 
+                                   exp.status === "expensive" ? "border-yellow-400" : 
+                                   "border-green-400";
+                const outcomeBg = exp.status === "failed" ? "bg-red-900/70" : 
+                                 exp.status === "expensive" ? "bg-yellow-900/70" : 
+                                 "bg-green-900/70";
+                const outcomeColor = exp.status === "failed" ? "text-red-300" : 
+                                    exp.status === "expensive" ? "text-yellow-300" : 
+                                    "text-green-300";
 
-                {/* Run 1 False Refusals - Red arrow */}
-                <line x1="270" y1="150" x2="380" y2="200" stroke="#EF5350" strokeWidth="3" markerEnd="url(#arrowred)"/>
-                <rect x="380" y="170" width="200" height="80" rx="10" fill="none" stroke="#EF5350" strokeWidth="2"/>
-                <text x="390" y="195" fontSize="14" fontWeight="bold" fill="#EF5350">Lots of False</text>
-                <text x="390" y="215" fontSize="14" fontWeight="bold" fill="#EF5350">refusals</text>
+                return (
+                  <div key={expIdx} className="flex gap-2">
+                    <div className={`w-48 flex-shrink-0 ${bgColor} rounded-lg p-4 border-l-4 ${borderColor}`}>
+                      <p className="font-bold text-sm">{exp.name}</p>
+                      <p className="text-xs opacity-90">{exp.description}</p>
+                    </div>
+                    <div className={`grid gap-2 flex-1`} style={{ gridTemplateColumns: `repeat(${slide.metrics.length + 2}, 1fr)` }}>
+                      {exp.scores.map((score, scoreIdx) => (
+                        <div key={scoreIdx} className="bg-white/20 rounded-lg p-4 flex items-center justify-center border border-white/40">
+                          <span className={`text-5xl ${score.color}`}>{score.value}</span>
+                        </div>
+                      ))}
+                      <div className={`${outcomeBg} rounded-lg p-4 flex items-center justify-center border-2 ${borderColor}`}>
+                        <span className={`font-bold text-lg ${outcomeColor}`}>{exp.outcome}</span>
+                      </div>
+                      <div className="bg-white/20 rounded-lg p-3 flex items-center justify-center border border-white/40">
+                        <span className="text-xs text-center opacity-90">{exp.comment}</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
 
-                {/* Comment for false refusals */}
-                <text x="590" y="200" fontSize="13" fill="#FFD54F" fontStyle="italic">Better put my focus</text>
-                <text x="590" y="220" fontSize="13" fill="#FFD54F" fontStyle="italic">elsewhere</text>
-
-                {/* Experiment 2 Box */}
-                <rect x="20" y="300" width="250" height="120" rx="20" fill="none" stroke="white" strokeWidth="2"/>
-                <text x="40" y="330" fontSize="18" fontWeight="bold" fill="white">Experiment 2</text>
-                <text x="40" y="360" fontSize="14" fill="#64B5F6">- LlamaIndex</text>
-                <text x="40" y="385" fontSize="14" fill="#64B5F6">- ReFlexion Prompting</text>
-                <text x="40" y="410" fontSize="14" fill="#64B5F6">- RAG with Reranker</text>
-                <text x="95" y="440" fontSize="16" fontWeight="bold" fill="white">LlamaIndex</text>
-
-                {/* Run 2 Blue arrow */}
-                <line x1="270" y1="360" x2="380" y2="360" stroke="#42A5F5" strokeWidth="3" markerEnd="url(#arrowblue)"/>
-                <rect x="380" y="330" width="200" height="80" rx="10" fill="none" stroke="#42A5F5" strokeWidth="2"/>
-                <text x="390" y="355" fontSize="14" fontWeight="bold" fill="#42A5F5">Great Results But</text>
-                <text x="390" y="375" fontSize="14" fontWeight="bold" fill="#42A5F5">Expensive token</text>
-                <text x="390" y="395" fontSize="14" fontWeight="bold" fill="#42A5F5">spending</text>
-
-                {/* Comment */}
-                <text x="590" y="375" fontSize="13" fill="#FFD54F" fontStyle="italic">Not bad, let's see</text>
-                <text x="590" y="395" fontSize="13" fill="#FFD54F" fontStyle="italic">if we can come up with</text>
-                <text x="590" y="415" fontSize="13" fill="#FFD54F" fontStyle="italic">something else</text>
-
-                {/* Experiment 3 Box */}
-                <rect x="20" y="490" width="250" height="100" rx="20" fill="none" stroke="white" strokeWidth="2"/>
-                <text x="40" y="520" fontSize="18" fontWeight="bold" fill="white">Experiment 3</text>
-                <text x="40" y="550" fontSize="14" fill="#64B5F6">- Plain LLM</text>
-                <text x="40" y="575" fontSize="14" fill="#64B5F6">- Simple RAG, without Reranker</text>
-                <text x="95" y="600" fontSize="16" fontWeight="bold" fill="white">OpenAI</text>
-
-                {/* Run 3 Green arrow */}
-                <line x1="270" y1="540" x2="380" y2="540" stroke="#66BB6A" strokeWidth="3" markerEnd="url(#arrowgreen)"/>
-                <rect x="380" y="510" width="200" height="80" rx="10" fill="none" stroke="#66BB6A" strokeWidth="2"/>
-                <text x="390" y="535" fontSize="14" fontWeight="bold" fill="#66BB6A">Factfulness = 0.9</text>
-                <text x="390" y="555" fontSize="14" fontWeight="bold" fill="#66BB6A">Good metrics!</text>
-
-                {/* Comment */}
-                <text x="590" y="545" fontSize="13" fill="#FFD54F" fontStyle="italic">Now we're talking!</text>
-
-                {/* Arrow markers */}
-                <defs>
-                  <marker id="arrowred" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L0,6 L9,3 z" fill="#EF5350"/>
-                  </marker>
-                  <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L0,6 L9,3 z" fill="#42A5F5"/>
-                  </marker>
-                  <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L0,6 L9,3 z" fill="#66BB6A"/>
-                  </marker>
-                </defs>
-              </svg>
+            {/* Insights */}
+            <div className="mt-8 bg-white/20 backdrop-blur rounded-lg p-6 border-2 border-white/40">
+              <p className="text-base opacity-95">
+                <span className="font-bold">Key insight:</span> The simplest approach won. No complex reranking, no multi-agent orchestration—just solid fundamentals with excellent cost-benefit ratio.
+              </p>
             </div>
           </div>
         );
