@@ -38,12 +38,15 @@ const SlidePresentation = () => {
     {
       title: "Evals First, Code Second",
       subtitle: "Building Reliable AI Agents Through Evaluation-Driven Development",
-      layout: "title",
-      accent: "from-blue-600 to-cyan-600"
+      layout: "title-intro",
+      accent: "from-blue-600 to-cyan-600",
+      speaker: "Pedro Azevedo",
+      role: "AI Engineer at Hyland",
+      credentials: "MSc Mechanical Engineering"
     },
     {
-      title: "What Happens Without Monitoring",
-      subtitle: "A True Story",
+      title: "Story Time",
+      subtitle: "Deploying to Prod without Evals and Monitoring",
       layout: "title",
       accent: "from-purple-600 to-pink-600"
     },
@@ -53,6 +56,8 @@ const SlidePresentation = () => {
       icon: "✅",
       timeline: "Launch Day",
       situation: "Agent deployed to production",
+      image: "retired.jpg",
+      imageAlt: "Everything is fine",
       detail: "Everything works perfectly",
       color: "from-green-500 to-emerald-500"
     },
@@ -62,6 +67,8 @@ const SlidePresentation = () => {
       icon: "🚀",
       timeline: "3 Months Later",
       situation: "New GPT-5 Model Released",
+      image: "new-toy.webp",
+      imageAlt: "New toy",
       detail: "Business: 'Can we switch? Might be better!'",
       color: "from-blue-500 to-cyan-500"
     },
@@ -71,6 +78,8 @@ const SlidePresentation = () => {
       icon: "🔄",
       timeline: "Day 1",
       situation: "Deploy new model to production",
+      image: "to-prod.jpg",
+      imageAlt: "Everything is fine",
       detail: "No evals. No testing. 'Let's just try it.'",
       color: "from-amber-500 to-orange-500"
     },
@@ -104,11 +113,13 @@ const SlidePresentation = () => {
       color: "from-orange-500 to-red-500"
     },
     {
-      title: "The Real Problem",
+      title: "The Real Problem - Data Drift",
       layout: "story-beat",
       icon: "🔍",
       timeline: "Week Later - Investigation",
       situation: "Root cause discovered",
+      image: "french.jpg",
+      imageAlt: "French",
       detail: "Business sold product in Europe. Customers speaking French. Embeddings don't support multilingual.",
       color: "from-indigo-500 to-purple-500"
     },
@@ -130,32 +141,69 @@ const SlidePresentation = () => {
       detail: "Can't upgrade. Can't fix. Breaking thing means breaking business. Stuck.",
       color: "from-slate-600 to-slate-700"
     },
+       {
+      title: "Story Time",
+      subtitle: "Deploying to Prod without Evals and Monitoring",
+      layout: "title",
+      accent: "from-purple-600 to-pink-600"
+    },
     {
       title: "How We Do ML Projects",
       layout: "philosophy",
       phases: [
-        { number: "1", label: "Planning", desc: "Define Problem" },
-        { number: "2", label: "Scoping", desc: "Define Success" },
-        { number: "3", label: "Experimentation", desc: "Build & Test" },
-        { number: "4", label: "Development", desc: "Scale Solution" }
+        { number: "1", label: "Planning", desc: "What do you want to build? When do you want it build by?" },
+        { number: "2", label: "Scoping", desc: "What are going to build? What are we going to test?" },
+        { number: "3", label: "Experimentation", desc: "Will this work? How does this compare with other approaches?" },
+        { number: "4", label: "Development", desc: "Build Mantianable code an MLOps integration" },
+        { number: "5", label: "Deployment", desc: "Make it run at production scale and monitor performance"},
+        { number: "6", label: "Evaluation and Improvement", desc: "Collect the right metrics, ajust and adapt to changes" },
+
       ],
       accent: "from-purple-500 to-pink-500"
     },
-    {
-      title: "Evaluation: The Missing Link",
-      layout: "concept",
-      content: "Without systematic evaluation at every stage, we ship blindly. Metrics define what success means.",
-      subtitle: "Theory",
-      accent: "from-emerald-500 to-teal-500"
+      {
+      title: "Stakeholder Conversation",
+      layout: "kpi-examples",
+      subtitle: "Before Writing Code: Define Your Success Metrics",
+      content: "What does success look like? What tradeoffs matter? What can fail? How often?",
+      kpis: [
+        { 
+          icon: "✓", 
+          metric: "Correctness", 
+          example: "Agent can be incorrect ≤ 20% of time",
+          category: "ML Performance"
+        },
+        { 
+          icon: "⏱️", 
+          metric: "Response Time", 
+          example: "Agent takes max 5 minutes per task",
+          category: "Performance"
+        },
+        { 
+          icon: "💰", 
+          metric: "Cost Per Task", 
+          example: "Agent cost shouldn't exceed $5.00",
+          category: "Business"
+        },
+        { 
+          icon: "📊", 
+          metric: "Business KPI", 
+          example: "Process 100+ customer issues daily",
+          category: "Business"
+        }
+      ],
+      accent: "from-orange-500 to-red-500"
     },
     {
-      title: "The GenAI Problem",
+      title: "The GenAI Problem (It's not just a Lambda)",
       layout: "problem",
+      image: "genai-lambda.png",
       points: [
         { icon: "⚡", text: "GenAI is SO easy to deploy: just call an API" },
-        { icon: "🎲", text: "We try things without thinking: 'Let's see if it works'" },
+        { icon: "🎲", text: "We try things without thinking: 'Let's see if it works' (No Data Driven Decisions)" },
         { icon: "🚀", text: "Ship → Fail → Debug → Repeat (expensive cycle)" },
-        { icon: "😰", text: "No confidence in production behavior" }
+        { icon: "😰", text: "No confidence in production behavior. No real Edge Case Handeling"},
+        { icon: "X", text: "No way to make the systems better over time"}
       ],
       accent: "from-red-500 to-orange-500"
     },
@@ -179,13 +227,7 @@ const SlidePresentation = () => {
     // ============================================
     // PART 2: METRICS & SUCCESS DEFINITION
     // ============================================
-    {
-      title: "Stakeholder Conversation",
-      layout: "concept",
-      subtitle: "Before Writing Code",
-      content: "What does success look like? What tradeoffs matter? What can fail? How often?",
-      accent: "from-orange-500 to-red-500"
-    },
+  
     {
       title: "Three Layers of Metrics",
       layout: "scorers",
@@ -532,17 +574,52 @@ const SlidePresentation = () => {
           </div>
         );
 
+      case "title-intro":
+        return (
+          <div className={`h-full bg-gradient-to-br ${slide.accent} flex flex-col items-start justify-between text-white px-16 py-16 relative overflow-hidden`}>
+            {/* Decorative background elements */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48"></div>
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/5 rounded-full -ml-40 -mb-40"></div>
+            
+            {/* Main content - center top (dominant) */}
+            <div className="relative z-10 w-full flex flex-col items-center justify-start pt-20 flex-1">
+              <h1 className="text-9xl font-black mb-8 leading-tight text-center max-w-5xl">{slide.title}</h1>
+              <p className="text-3xl opacity-90 font-light text-center max-w-4xl">{slide.subtitle}</p>
+            </div>
+
+            {/* Speaker info - bottom right */}
+            <div className="relative z-10 text-right">
+              <p className="text-3xl font-bold mb-3 tracking-wide">{slide.speaker}</p>
+              <div className="border-t border-white/40 pt-3">
+                <p className="text-base opacity-90 font-medium mb-1">{slide.role}</p>
+                <p className="text-sm opacity-70 font-light">{slide.credentials}</p>
+              </div>
+            </div>
+          </div>
+        );
+
       case "problem":
         return (
           <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center`}>
             <h2 className="text-5xl font-black mb-12">{slide.title}</h2>
-            <div className="space-y-6">
-              {slide.points.map((pt, i) => (
-                <div key={i} className="flex items-start gap-6 text-xl">
-                  <span className="text-4xl">{pt.icon}</span>
-                  <p className="pt-2">{pt.text}</p>
+            <div className="flex items-center gap-12">
+              <div className="flex-1 space-y-6">
+                {slide.points.map((pt, i) => (
+                  <div key={i} className="flex items-start gap-6 text-xl">
+                    <span className="text-4xl">{pt.icon}</span>
+                    <p className="pt-2">{pt.text}</p>
+                  </div>
+                ))}
+              </div>
+              {slide.image && (
+                <div className="flex-shrink-0">
+                  <img 
+                    src={slide.image} 
+                    alt="Problem illustration"
+                    className="h-120 w-120 rounded-2xl shadow-2xl object-cover"
+                  />
                 </div>
-              ))}
+              )}
             </div>
           </div>
         );
@@ -554,6 +631,37 @@ const SlidePresentation = () => {
             <p className="text-3xl mb-6 font-bold">{slide.subtitle}</p>
             <div className="bg-white/20 backdrop-blur rounded-2xl p-12 max-w-2xl">
               <p className="text-2xl">{slide.content}</p>
+            </div>
+          </div>
+        );
+
+      case "kpi-examples":
+        return (
+          <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center`}>
+            <h2 className="text-5xl font-black mb-2">{slide.title}</h2>
+            <p className="text-xl opacity-90 mb-8">{slide.subtitle}</p>
+            
+            <div className="grid grid-cols-2 gap-6 h-full">
+              {slide.kpis.map((kpi, i) => (
+                <div key={i} className="bg-white/20 backdrop-blur rounded-2xl p-6 border-2 border-white/30 hover:border-white/60 transition flex flex-col">
+                  {/* Category badge */}
+                  <div className="inline-block bg-white/20 px-3 py-1 rounded-full text-xs font-bold mb-3 opacity-80 w-fit">
+                    {kpi.category}
+                  </div>
+                  
+                  {/* Icon and metric name */}
+                  <div className="flex items-start gap-3 mb-4">
+                    <span className="text-4xl flex-shrink-0">{kpi.icon}</span>
+                    <h3 className="text-2xl font-black leading-tight">{kpi.metric}</h3>
+                  </div>
+                  
+                  {/* Example box */}
+                  <div className="bg-white/15 rounded-xl p-4 border-l-4 border-white/60 flex-1 flex flex-col">
+                    <p className="text-xs opacity-70 mb-2 font-bold">SUCCESS LOOKS LIKE:</p>
+                    <p className="text-lg font-bold leading-snug">{kpi.example}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         );
