@@ -36,8 +36,8 @@ const SlidePresentation = () => {
     // PART 1: THEORY & FOUNDATIONS
     // ============================================
     {
-      title: "Evals First, Code Second",
-      subtitle: "Building Reliable AI Agents Through Evaluation-Driven Development",
+      title: "Your Agent Needs some Evals",
+      subtitle: "Eval Driven Development in GenAI Applications",
       layout: "title-intro",
       accent: "from-blue-600 to-cyan-600",
       speaker: "Pedro Azevedo",
@@ -45,8 +45,8 @@ const SlidePresentation = () => {
       credentials: "MSc Mechanical Engineering"
     },
     {
-      title: "Story Time",
-      subtitle: "Deploying to Prod without Evals and Monitoring",
+      title: "If you're building AI systems without evals, ",
+      subtitle: "you're not engineering. You're gambling.",
       layout: "title",
       accent: "from-purple-600 to-pink-600"
     },
@@ -66,7 +66,7 @@ const SlidePresentation = () => {
       layout: "story-beat",
       icon: "🚀",
       timeline: "3 Months Later",
-      situation: "New GPT-5 Model Released",
+      situation: "New GPT-8 Model Released",
       image: "new-toy.webp",
       imageAlt: "New toy",
       detail: "Business: 'Can we switch? Might be better!'",
@@ -141,12 +141,7 @@ const SlidePresentation = () => {
       detail: "Can't upgrade. Can't fix. Breaking thing means breaking business. Stuck.",
       color: "from-slate-600 to-slate-700"
     },
-       {
-      title: "Story Time",
-      subtitle: "Deploying to Prod without Evals and Monitoring",
-      layout: "title",
-      accent: "from-purple-600 to-pink-600"
-    },
+
     {
       title: "How We Do ML Projects",
       layout: "philosophy",
@@ -536,6 +531,7 @@ const SlidePresentation = () => {
       icon: "🔬",
       content: "Which agent system works best?",
       example: "• React Agent: Simple action/observation\n• Swarm Agent System: Specialist agents\n• Supervision Agent: Hierarchical control\n• Deep Agent: Multi-step reasoning\n• Planner Agent: Plan then execute\n\nCompare on all metrics",
+      image: "agents.png",
       accent: "from-green-600 to-emerald-600"
     },
     {
@@ -1007,13 +1003,24 @@ const SlidePresentation = () => {
           <div className={`h-full bg-gradient-to-br ${slide.accent} text-white p-12 flex flex-col justify-center`}>
             <h2 className="text-5xl font-black mb-12">{slide.title}</h2>
             <div className="flex items-start gap-12">
-              <div className="text-8xl">{slide.icon}</div>
               <div className="flex-1">
-                <p className="text-3xl font-bold mb-8">{slide.content}</p>
+                <div className="flex items-start gap-6 mb-8">
+                  <div className="text-8xl flex-shrink-0">{slide.icon}</div>
+                  <p className="text-3xl font-bold">{slide.content}</p>
+                </div>
                 <div className="bg-white/20 backdrop-blur rounded-xl p-8 font-mono text-lg whitespace-pre-line">
                   {slide.example}
                 </div>
               </div>
+              {slide.image && (
+                <div className="flex-shrink-0">
+                  <img 
+                    src={slide.image} 
+                    alt={slide.imageAlt || "Feature image"}
+                    className="w-96 rounded-xl shadow-lg"
+                  />
+                </div>
+              )}
             </div>
           </div>
         );
